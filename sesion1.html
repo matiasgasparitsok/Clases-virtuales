@@ -1,0 +1,37 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sesión 1 · Juego de Dados</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#f7f8fc;margin:0}
+.card{max-width:720px;margin:auto;padding:18px}
+.h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.h b{font-size:20px} .badge{background:#4339f2;color:#fff;padding:4px 10px;border-radius:999px;font:700 12px/1 sans-serif}
+.note{background:#fff3cd;border-left:5px solid #ffc107;padding:10px;border-radius:8px;margin:10px 0}
+.dados{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.d{width:70px;height:70px;border-radius:12px;border:3px solid #333;background:#fff;display:grid;place-items:center;font-size:36px;cursor:pointer}
+.table{width:100%;border-collapse:collapse;margin-top:10px}
+.table th,.table td{border:2px solid #e5e7f1;padding:10px;text-align:center}
+input{width:90px;padding:6px;border:2px solid #ddd;border-radius:6px;text-align:center}
+.ok{background:#c8e6c9;border-color:#2e7d32}.bad{background:#ffccd5;border-color:#b71c1c}
+</style>
+<div class="card">
+  <div class="h"><b>🎲 SESIÓN 1: Juego de dados iguales</b><span class="badge">Suma repetida</span></div>
+  <div class="note"><b>Objetivo:</b> sumar números que se repiten. Haz clic en los dados para cambiar su número.</div>
+
+  <div class="dados" id="area">
+    <div class="d">⚀</div><div class="d">⚁</div><div class="d">⚂</div><div class="d">⚃</div><div class="d">⚄</div>
+  </div>
+
+  <table class="table">
+    <tr><th>Caso</th><th>Cálculo</th><th>Total</th></tr>
+    <tr><td>3 dados con 6</td><td>6+6+6 =</td>
+      <td><input type="number" data-ans="18"></td></tr>
+    <tr><td>4 dados con 5</td><td>5+5+5+5 =</td>
+      <td><input type="number" data-ans="20"></td></tr>
+  </table>
+</div>
+<script>
+const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
+document.querySelectorAll('.d').forEach(d=>d.onclick=()=>{let i=faces.indexOf(d.textContent);d.textContent=faces[(i+1)%6];});
+document.querySelectorAll('input').forEach(i=>i.oninput=()=>{i.classList.remove('ok','bad');if(!i.value)return;
+i.classList.add(i.value==i.dataset.ans?'ok':'bad');});
+</script></html>
